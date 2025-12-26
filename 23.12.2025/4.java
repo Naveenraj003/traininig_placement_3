@@ -1,37 +1,35 @@
 import java.util.Scanner;
 
-class ATM {
+class Employee {
+    int empId;
+    String name;
+    double basic, hra, da, gross;
+
+    void calculateSalary() {
+        hra = basic * 0.20;
+        da = basic * 0.10;
+        gross = basic + hra + da;
+    }
+
+    void display() {
+        System.out.println("\nEmployee ID: " + empId);
+        System.out.println("Name: " + name);
+        System.out.println("Gross Salary: " + gross);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int pin = 1234;
-        double balance = 5000;
+        Employee e = new Employee();
 
-        System.out.print("Enter PIN: ");
-        if (sc.nextInt() != pin) {
-            System.out.println("Invalid PIN");
-            return;
-        }
+        System.out.print("Enter ID: ");
+        e.empId = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Name: ");
+        e.name = sc.nextLine();
+        System.out.print("Enter Basic Salary: ");
+        e.basic = sc.nextDouble();
 
-        int choice;
-        do {
-            System.out.println("\n1.Check Balance 2.Deposit 3.Withdraw 4.Exit");
-            choice = sc.nextInt();
-
-            switch (choice) {
-                case 1 -> System.out.println("Balance: " + balance);
-                case 2 -> {
-                    System.out.print("Enter amount: ");
-                    balance += sc.nextDouble();
-                }
-                case 3 -> {
-                    System.out.print("Enter amount: ");
-                    double amt = sc.nextDouble();
-                    if (amt <= balance)
-                        balance -= amt;
-                    else
-                        System.out.println("Insufficient Funds");
-                }
-            }
-        } while (choice != 4);
+        e.calculateSalary();
+        e.display();
     }
 }
